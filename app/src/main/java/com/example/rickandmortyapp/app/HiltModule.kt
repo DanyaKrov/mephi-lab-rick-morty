@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.rickandmortyapp.common.data.local.database.RickDatabase
 import com.example.rickandmortyapp.common.data.remote.module.RetrofitModule
 import com.example.rickandmortyapp.common.data.util.CharacterMapper
+import com.example.rickandmortyapp.screen_characters.data.local.dao.CharactersDao
 import com.example.rickandmortyapp.screen_characters.data.local.dao.repository.CharactersDaoRepository
 import com.example.rickandmortyapp.screen_characters.data.local.dao.service.CharactersDaoService
 import com.example.rickandmortyapp.screen_characters.data.local.repository.CharactersLocalRepository
@@ -47,6 +48,12 @@ object HiltModule {
             RickDatabase::class.java,
             "rickmorty_local_database"
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharactersDao(db: RickDatabase): CharactersDao {
+        return db.charactersDao()
     }
 }
 

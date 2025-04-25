@@ -1,5 +1,6 @@
 package com.example.rickandmortyapp.screen_characters.data.service
 
+import android.util.Log
 import com.example.rickandmortyapp.common.data.util.CharacterMapper
 import com.example.rickandmortyapp.screen_characters.data.local.repository.CharactersLocalRepository
 import com.example.rickandmortyapp.screen_characters.data.remote.repository.CharactersRemoteRepository
@@ -29,6 +30,7 @@ class CharactersService @Inject constructor(
     private suspend fun loadRemoteToLocalData(): List<CharacterModel> {
         val remoteCharacters = remoteRepository.getAllCharacters()
         localRepository.createCharacters(remoteCharacters.map { mapper.fromRemoteToEntity(it) })
+        Log.i("testing", localRepository.getAllCharacters().toString())
         return remoteCharacters.map { mapper.fromRemoteToModel(it) }
     }
 }
