@@ -1,5 +1,6 @@
 package com.example.rickandmortyapp.screen_characters.presentation.viewModel
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -31,7 +32,7 @@ class CharactersViewModel @Inject constructor(
 
 
     private suspend fun getCharacters() {
-        refreshAndGetCharacters(true)
+        refreshAndGetCharacters()
             .onEach { result ->
                 when (result) {
                     is Resource.Success -> result.data?.let {

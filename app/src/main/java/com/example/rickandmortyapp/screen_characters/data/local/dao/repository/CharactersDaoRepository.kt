@@ -5,6 +5,8 @@ import com.example.rickandmortyapp.common.data.local.model.entity.CharacterEntit
 interface CharactersDaoRepository {
     suspend fun getAllCharacters(): List<CharacterEntity>
     suspend fun getCharacterById(id: Int): CharacterEntity
+    suspend fun getCharacterByName(name: String): CharacterEntity
     suspend fun createCharacter(characterEntity: CharacterEntity)
     suspend fun deleteAllCharacters(): Boolean
+    suspend fun createCharacters(characters: List<CharacterEntity>)
 }

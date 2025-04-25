@@ -29,8 +29,11 @@ class CharactersService @Inject constructor(
 
     private suspend fun loadRemoteToLocalData(): List<CharacterModel> {
         val remoteCharacters = remoteRepository.getAllCharacters()
-        localRepository.createCharacters(remoteCharacters.map { mapper.fromRemoteToEntity(it) })
-        Log.i("testing", localRepository.getAllCharacters().toString())
-        return remoteCharacters.map { mapper.fromRemoteToModel(it) }
+        val entities = remoteCharacters.map {
+            mapper.fromRemoteToEntity(it)
+        }
+        localRepository.createCharacters(entities)
+        val response = remoteCharacters.map { mapper.fromRemoteToModel(it) }
+        return response
     }
 }
